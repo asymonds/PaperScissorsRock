@@ -43,22 +43,50 @@ function playRound(player, computer) {
   }
 }
 
-function game() {
-  let score = 0;
-  for (let i = 0; i < 5; i++) {
-    let playerChoice = prompt("Paper, Scissors or Rock? Choose wisely!");
-    res = playRound(playerChoice.toLowerCase(), getComputerChoice());
-    console.log(res.result);
-    score += res.points;
-  }
-  return score;
-}
+let playerScore = 0;
+let computerScore = 0;
+const btns = document.querySelectorAll("button");
+const resultSpan = document.querySelector("#result");
+const scoreSpan = document.querySelector("#score");
 
-let didYouWin = game();
-if (didYouWin < 0) console.log("Loser");
-else if (didYouWin === 0) console.log("Draw");
-else console.log("Winner Winner Chicken Dinner");
+btns.forEach((item) => {
+  item.addEventListener("click", (e) => {
+    const result = playRound(e.target.id, getComputerChoice());
+    console.log(result);
+    resultSpan.textContent = result.result;
+    // console.log(result.score);
+    playerScore = result.points === 1 ? (playerScore += 1) : playerScore;
+    computerScore = result.points === -1 ? (computerScore += 1) : computerScore;
 
-console.log("Your score is " + didYouWin);
+    scoreSpan.textContent = playerScore + " : " + computerScore;
+    if (playerScore === 5) {
+      scoreSpan.classList.add("winner");
+      resultSpan.remove();
+      btns.forEach((i) => (i.disabled = true));
+    } else if (computerScore === 5) {
+      scoreSpan.classList.add("loser");
+      resultSpan.remove();
+      btns.forEach((i) => (i.disabled = true));
+    }
+  });
+});
+
+// function game() {
+//   let score = 0;
+//   for (let i = 0; i < 5; i++) {
+//     let playerChoice = prompt("Paper, Scissors or Rock? Choose wisely!");
+//     res = playRound(playerChoice.toLowerCase(), getComputerChoice());
+//     console.log(res.result);
+//     score += res.points;
+//   }
+//   return score;
+// }
+
+// let didYouWin = game();
+// if (didYouWin < 0) console.log("Loser");
+// else if (didYouWin === 0) console.log("Draw");
+// else console.log("Winner Winner Chicken Dinner");
+
+// console.log("Your score is " + didYouWin);
 
 // console.log(getComputerChoice());

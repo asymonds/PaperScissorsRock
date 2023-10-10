@@ -1,0 +1,38 @@
+* {
+  margin: 0px;
+  box-sizing: border-box;
+}
+.buttons {
+  display: flexbox;
+  margin: 20px;
+  justify-content: center;
+}
+
+.winner {
+  background-color: green;
+}
+
+.loser {
+  background-color: red;
+}
+
+.results {
+  margin: 20px;
+}
+
+button {
+  background-color: yellow;
+  padding: 10px 15px;
+  border-radius: 10px;
+  flex: 0 0 auto;
+}
+
+#result {
+  font-size: 18px;
+  color: black;
+}
+
+#score {
+  font-size: 18px;
+  color: black;
+}
